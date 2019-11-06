@@ -15,9 +15,7 @@ CKEDITOR.dialog.add('btbadgesDialog', function(editor){
 						required: true,
 						label: lang.txtLabel,
 						setup: function(element){
-							for (const child of element.getChildren().$)
-								if (child.nodeName == "#text")
-									return this.setValue(child.nodeValue);
+							this.setValue(element.getText().trim());
 						},
 						commit: function(element){
 							element.setText(this.getValue() || 'Badge');
