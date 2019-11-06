@@ -23,7 +23,7 @@ CKEDITOR.plugins.add('btbadges', {
 			});
 
 			editor.contextMenu.addListener(function(element){
-				if (element.getAscendant({'span':1, 'a':1}, true))
+				if (element.is('span', 'a'))
 					return { btbadgesItem: CKEDITOR.TRISTATE_OFF };
 			});
 		}
