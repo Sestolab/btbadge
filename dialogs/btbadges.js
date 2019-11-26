@@ -37,11 +37,11 @@ CKEDITOR.dialog.add('btbadgesDialog', function(editor){
 						],
 						default: 'badge-primary',
 						setup: function(element){
-							if(element.getAttribute('class'))
-								this.setValue(element.getAttribute('class').match(/badge-[^\s]+/i) || 'badge-primary');
+							this.setValue(element.matchClass(new RegExp(this.getValues().join('|'))) || 'badge-primary');
 						},
 						commit: function(element){
-							element.setAttribute('class', 'badge ' + this.getValue());
+							if (!element.hasClass(this.getValue()))
+								element.toggleClass(this.getValue(), this.getValues());
 						}
 					},
 					{
@@ -52,8 +52,7 @@ CKEDITOR.dialog.add('btbadgesDialog', function(editor){
 							this.setValue(element.hasClass('badge-pill'));
 						},
 						commit: function(element){
-							if (this.getValue())
-								element.addClass('badge-pill');
+							element.toggleClass((this.getValue() != element.hasClass('badge-pill')) ? 'badge-pill' : null);
 						}
 					}
 				]
@@ -75,7 +74,7 @@ CKEDITOR.dialog.add('btbadgesDialog', function(editor){
 								element.renameNode('a');
 								element.setAttribute('href', this.getValue());
 							}else{
-								element.removeAttribute('href');
+								element.removeAttributes(['href', 'target']);
 								element.renameNode('span');
 							}
 						}
@@ -95,10 +94,8 @@ CKEDITOR.dialog.add('btbadgesDialog', function(editor){
 							this.setValue(element.getAttribute('target') || '');
 						},
 						commit: function(element){
-							if (this.getValue() && element.hasAscendant('a', true))
-								element.setAttribute('target', this.getValue());
-							else
-								element.removeAttribute('target');
+							if (element.is('a') && element.getAttribute('target') != (this.getValue() || null))
+								element.toggleAttribute('target', this.getValue());
 						}
 					}
 				]
@@ -144,6 +141,7 @@ CKEDITOR.dialog.add('btbadgesDialog', function(editor){
 		},
 
 		onOk: function(){
+			this.element.toggleClass(!this.element.hasClass('badge') ? 'badge' : null);
 			this.commitContent(this.element);
 			if (this.insertMode)
 				editor.insertElement(this.element);

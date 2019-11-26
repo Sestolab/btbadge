@@ -1,5 +1,5 @@
 CKEDITOR.plugins.add('btbadges', {
-	requires: 'dialog',
+	requires: 'dialog,smethods',
 	lang: 'en,ru,uk',
 	icons: 'btbadges',
 
