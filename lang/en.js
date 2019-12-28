@@ -20,5 +20,6 @@ CKEDITOR.plugins.setLang('btbadges', 'en', {
 	targetTop: 'Topmost Window (_top)',
 	targetSelf: 'Same Window (_self)',
 	targetParent: 'Parent Window (_parent)',
-	tabIcon: 'Icon'
+	tabIcon: 'Icon',
+	remove: 'Remove Bootstrap Badge'
 });

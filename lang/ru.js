@@ -20,5 +20,6 @@ CKEDITOR.plugins.setLang('btbadges', 'ru', {
 	targetTop: 'Главное окно (_top)',
 	targetSelf: 'Текущее окно (_self)',
 	targetParent: 'Родительское окно (_parent)',
-	tabIcon: 'Иконка'
+	tabIcon: 'Иконка',
+	remove: 'Удалить значок Bootstrap'
 });
